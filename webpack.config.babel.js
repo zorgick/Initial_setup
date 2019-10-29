@@ -7,6 +7,7 @@ const atImport = require('postcss-import')
 const PATH = require('path')
 
 const { NODE_ENV } = process.env
+const PROJECT = 'shoppingCart'
 
 module.exports = {
   entry: {
@@ -16,7 +17,7 @@ module.exports = {
     filename: 'chunk.[name].js?[hash]',
     chunkFilename: 'chunk.[name].js?[chunkhash]',
     path: PATH.resolve(__dirname, 'dist'),
-    publicPath: '/ants/'
+    publicPath: `/${PROJECT}/`
   },
   optimization: {
     runtimeChunk: true,
@@ -45,7 +46,6 @@ module.exports = {
             loader: 'css-loader',
             options: {
               modules: true,
-              localsConvention: 'camelCase',
               importLoaders: 1
             }
           },
@@ -88,6 +88,7 @@ module.exports = {
     new webpack.optimize.ModuleConcatenationPlugin(),
     new HtmlWebpackPlugin({
       template: './src/index.html',
+      title: PROJECT,
       chunks: ['runtime~app', 'vendors', 'app']
     })
   ],
@@ -101,7 +102,7 @@ module.exports = {
         rewrites: [
           {
             from: /^\/$/,
-            to: '/ants/index.html'
+            to: `/${PROJECT}/index.html`
           }
         ]
       },

@@ -8,19 +8,20 @@
     "start": "cross-env NODE_ENV=development webpack-dev-server -d --hot",
     "lint": "standard && stylelint \"src/**/*.css\"",
     "format": "prettier --write \"src/**/*.js\" && standard --fix",
-    "test": "jest",
-    "precommit": "lint-staged"
+    "test": "jest"
   },
   "keywords": [],
   "author": "Zakhar Kononov (zorgizorgik@gmail.com)",
   "license": "MIT",
   "dependencies": {
     "core-js": "^3.2.1",
+    "history": "^4.10.1",
     "isomorphic-fetch": "^2.2.1",
     "prop-types": "^15.7.2",
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6",
+    "react": "16.9.0",
+    "react-dom": "16.9.0",
     "react-redux": "^7.1.0",
+    "react-router-dom": "^5.1.2",
     "redux": "^4.0.3",
     "redux-actions": "^2.6.5",
     "redux-thunk": "^2.3.0",
@@ -41,6 +42,9 @@
     "babel-loader": "^8.0.6",
     "cross-env": "^5.2.0",
     "css-loader": "^3.0.0",
+    "enzyme": "^3.10.0",
+    "enzyme-adapter-react-16": "^1.15.1",
+    "enzyme-to-json": "^3.4.3",
     "html-loader": "^0.5.5",
     "html-webpack-plugin": "^3.2.0",
     "husky": "^3.0.0",
@@ -66,7 +70,10 @@
         "@babel/preset-env",
         {
           "targets": {
-            "chrome": "58",
+            "node": "current",
+            "firefox": "60",
+            "chrome": "67",
+            "safari": "11.1",
             "ie": "11"
           },
           "modules": false
@@ -94,6 +101,10 @@
     "collectCoverageFrom": [
       "src/**/*.{js,jsx}"
     ],
+    "setupFilesAfterEnv": [
+      "<rootDir>/jestSetup.js"
+    ],
+    "snapshotSerializers": ["enzyme-to-json/serializer"],
     "testMatch": [
       "<rootDir>/src/**/*.test.js"
     ]
@@ -133,5 +144,10 @@
       "stylelint \"src/**/*.css\" --fix",
       "git add"
     ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
   }
 }

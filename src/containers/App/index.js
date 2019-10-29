@@ -7,7 +7,7 @@ import { connect } from 'react-redux'
 import { checkHandshake } from './actions'
 import { selectGreetings } from './selectors'
 
-class App extends PureComponent {
+export class App extends PureComponent {
   initiateHandshake = () => {
     const { loadGreetings } = this.props
     loadGreetings()
