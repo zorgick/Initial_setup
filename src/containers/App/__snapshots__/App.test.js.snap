@@ -1,19 +1,16 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Testing App container... should render App container 1`] = `
-<App
-  hi="Hi from test"
-  loadGreetings={[Function]}
->
-  <section>
-    <h1>
-      Hi from test
-    </h1>
-    <button
-      onClick={[Function]}
-    >
-      Handshake
-    </button>
-  </section>
-</App>
+<section>
+  <h1
+    className="earlyDawn"
+  >
+    Hi from test
+  </h1>
+  <button
+    onClick={[Function]}
+  >
+    Handshake
+  </button>
+</section>
 `;

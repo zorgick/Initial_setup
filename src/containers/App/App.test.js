@@ -1,19 +1,25 @@
 import React from 'react'
 import {App} from './index'
-import {shallow, mount} from 'enzyme'
+import {shallowWrap, mountWrap} from 'utils/contextWrap'
 
 describe('Testing App container...', () => {
-  let wrapper
+  let props
+  const wrappedShallow = newProps =>
+    shallowWrap(<App {...props} {...newProps} />)
+
+  const wrappedMount = newProps => mountWrap(<App {...props} {...newProps} />)
 
   beforeEach(() => {
-    wrapper = mount(<App loadGreetings={() => {}} hi="Hi from test" />)
+    props = {
+      loadGreetings: jest.fn(),
+      hi: 'Hi from test'
+    }
   })
 
   test('should render App container', () => {
+    const wrapper = wrappedShallow()
     expect(wrapper).toMatchSnapshot()
   })
 
-  test('should handle click on the button', () => {
-    console.log(wrapper.props())
-  })
+  test('should handle click on the button', () => {})
 })
