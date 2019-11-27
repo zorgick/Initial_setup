@@ -2,7 +2,7 @@ import 'core-js/stable'
 import 'regenerator-runtime/runtime'
 
 import React from 'react'
-import { render } from 'react-dom'
+import ReactDOM from 'react-dom'
 import { Router } from 'react-router'
 import App from 'containers/App'
 import { Provider } from 'react-redux'
@@ -13,7 +13,7 @@ import './styles.css'
 
 const store = configureStore()
 
-render(
+ReactDOM.render(
   <Router history={history}>
     <Provider store={store}>
       <App />

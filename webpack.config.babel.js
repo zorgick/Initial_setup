@@ -1,13 +1,15 @@
+// @ts-nocheck
 const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const url = require('postcss-url')
 const cssPresetEnv = require('postcss-preset-env')
 const atImport = require('postcss-import')
+const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 
 const PATH = require('path')
 
 const { NODE_ENV } = process.env
-const PROJECT = 'shoppingCart'
+const PROJECT = 'initial-setup'
 
 module.exports = {
   entry: {
@@ -20,7 +22,7 @@ module.exports = {
     publicPath: `/${PROJECT}/`
   },
   optimization: {
-    runtimeChunk: true,
+    runtimeChunk: false,
     splitChunks: {
       cacheGroups: {
         vendor: {
@@ -90,8 +92,9 @@ module.exports = {
       template: './src/index.html',
       title: PROJECT,
       chunks: ['runtime~app', 'vendors', 'app']
-    })
-  ],
+    }),
+    NODE_ENV === 'production' && new CleanWebpackPlugin()
+  ].filter(Boolean),
   ...(NODE_ENV === 'production' && {
     devtool: 'source-map'
   }),

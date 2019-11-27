@@ -1,18 +1,23 @@
 {
-  "name": "exchange",
-  "version": "1.0.0",
-  "description": "",
+  "name": "initial-setup",
+  "version": "0.1.0",
+  "description": "My custom setup of a react project",
   "main": "index.js",
   "scripts": {
     "build": "cross-env NODE_ENV=production webpack -p --progress",
     "start": "cross-env NODE_ENV=development webpack-dev-server -d --hot",
-    "lint": "standard && stylelint \"src/**/*.css\"",
-    "format": "prettier --write \"src/**/*.js\" && standard --fix",
-    "test": "jest"
+    "typecss": "tcm --camelCase -p src/**/*.css",
+    "test": "jest --watch",
+    "test:build": "jest",
+    "docs": "jsdoc2md"
   },
   "keywords": [],
   "author": "Zakhar Kononov (zorgizorgik@gmail.com)",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/zorgick/Initial_setup.git"
+  },
   "dependencies": {
     "core-js": "^3.2.1",
     "history": "^4.10.1",
@@ -26,21 +31,27 @@
     "redux-actions": "^2.6.5",
     "redux-thunk": "^2.3.0",
     "regenerator": "^0.14.2",
-    "reselect": "^4.0.0"
+    "reselect": "^4.0.0",
+    "typed-css-modules": "^0.6.3"
   },
   "devDependencies": {
     "@babel/cli": "^7.5.0",
     "@babel/core": "^7.5.4",
     "@babel/plugin-proposal-class-properties": "^7.5.0",
     "@babel/plugin-proposal-object-rest-spread": "^7.5.4",
+    "@babel/plugin-syntax-dynamic-import": "^7.7.4",
     "@babel/plugin-transform-async-to-generator": "^7.5.0",
     "@babel/plugin-transform-modules-commonjs": "^7.5.0",
     "@babel/preset-env": "^7.5.4",
     "@babel/preset-react": "^7.0.0",
+    "@types/enzyme-adapter-react-16": "^1.0.5",
+    "@types/jest": "^24.0.23",
+    "@types/redux-logger": "^3.0.7",
     "babel-eslint": "^10.0.2",
     "babel-jest": "^24.8.0",
     "babel-loader": "^8.0.6",
     "browser-env": "^3.2.6",
+    "clean-webpack-plugin": "^3.0.0",
     "cross-env": "^5.2.0",
     "css-loader": "^3.2.0",
     "enzyme": "^3.10.0",
@@ -51,6 +62,7 @@
     "husky": "^3.0.0",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^24.8.0",
+    "jsdoc-to-markdown": "^5.0.3",
     "lint-staged": "^9.1.0",
     "postcss-import": "^12.0.1",
     "postcss-loader": "^3.0.0",
@@ -71,11 +83,11 @@
       [
         "@babel/preset-env",
         {
+          "useBuiltIns": "entry",
+          "corejs": 3,
           "targets": {
             "node": "current",
-            "firefox": "60",
-            "chrome": "67",
-            "safari": "11.1",
+            "browsers": "> 0.25%, not dead",
             "ie": "11"
           },
           "modules": false
@@ -86,7 +98,8 @@
     "plugins": [
       "@babel/plugin-transform-async-to-generator",
       "@babel/plugin-proposal-object-rest-spread",
-      "@babel/plugin-proposal-class-properties"
+      "@babel/plugin-proposal-class-properties",
+      "@babel/plugin-syntax-dynamic-import"
     ],
     "env": {
       "test": {
@@ -157,7 +170,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged && npm test"
+      "pre-commit": "npm run typecss && lint-staged && npm run test:build"
     }
   }
 }

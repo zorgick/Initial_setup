@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import { createStructuredSelector } from 'reselect'
 import { compose } from 'redux'
@@ -8,7 +8,7 @@ import styles from './styles.css'
 import { checkHandshake } from './actions'
 import { selectGreetings } from './selectors'
 
-export class App extends PureComponent {
+export class App extends React.PureComponent {
   initiateHandshake = () => {
     const { loadGreetings } = this.props
     loadGreetings()
