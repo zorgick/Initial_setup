@@ -21,8 +21,10 @@
   "dependencies": {
     "core-js": "^3.2.1",
     "history": "^4.10.1",
+    "intl": "^1.2.5",
     "isomorphic-fetch": "^2.2.1",
     "prop-types": "^15.7.2",
+    "proxy-polyfill": "^0.3.0",
     "react": "16.9.0",
     "react-dom": "16.9.0",
     "react-redux": "^7.1.0",
@@ -88,7 +90,7 @@
           "targets": {
             "node": "current",
             "browsers": "> 0.25%, not dead",
-            "ie": "11"
+            "ie": "10"
           },
           "modules": false
         }
