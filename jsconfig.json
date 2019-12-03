@@ -2,7 +2,7 @@
   "compilerOptions": {
     "outDir": "./dist", //Redirect output structure to the directory.
     "baseUrl": "./src",
-    "target": "es6",
+    "target": "es2015",
     "module": "commonjs",
     "checkJs": true,
     "jsx": "react"

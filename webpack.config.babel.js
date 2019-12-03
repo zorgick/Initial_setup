@@ -4,6 +4,8 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const url = require('postcss-url')
 const cssPresetEnv = require('postcss-preset-env')
 const atImport = require('postcss-import')
+const flexbugs = require('postcss-flexbugs-fixes')
+const cssnano = require('cssnano')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 
 const PATH = require('path')
@@ -62,10 +64,24 @@ module.exports = {
                 url({
                   url: 'inline'
                 }),
-                cssPresetEnv
+                cssPresetEnv,
+                cssnano,
+                flexbugs
               ]
             }
           }
+        ]
+      },
+      {
+        test: /\.svg$/,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: '[name].[hash].[ext]'
+            }
+          },
+          'svgo-loader'
         ]
       },
       {
