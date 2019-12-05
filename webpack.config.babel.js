@@ -1,4 +1,7 @@
 // @ts-nocheck
+const PATH = require('path')
+const cp = require('child_process')
+
 const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const url = require('postcss-url')
@@ -7,10 +10,19 @@ const atImport = require('postcss-import')
 const flexbugs = require('postcss-flexbugs-fixes')
 const cssnano = require('cssnano')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
+  .BundleAnalyzerPlugin
 
-const PATH = require('path')
+const commit = cp
+  .execSync('git rev-parse HEAD')
+  .toString()
+  .trim()
+const version = cp
+  .execSync('git describe --abbrev=0 --tags')
+  .toString()
+  .trim()
 
-const { NODE_ENV } = process.env
+const { DEBUG_BUNDLE, NODE_ENV } = process.env
 const PROJECT = 'initial-setup'
 
 module.exports = {
@@ -100,7 +112,9 @@ module.exports = {
   plugins: [
     new webpack.DefinePlugin({
       'process.env': {
-        NODE_ENV: JSON.stringify(NODE_ENV)
+        NODE_ENV: JSON.stringify(NODE_ENV),
+        COMMIT: JSON.stringify(commit),
+        VERSION: JSON.stringify(version)
       }
     }),
     new webpack.optimize.ModuleConcatenationPlugin(),
@@ -109,7 +123,8 @@ module.exports = {
       title: PROJECT,
       chunks: ['runtime~app', 'vendors', 'app']
     }),
-    NODE_ENV === 'production' && new CleanWebpackPlugin()
+    NODE_ENV === 'production' && new CleanWebpackPlugin(),
+    DEBUG_BUNDLE && new BundleAnalyzerPlugin()
   ].filter(Boolean),
   ...(NODE_ENV === 'production' && {
     devtool: 'source-map'
