@@ -1,16 +1,30 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Testing App container... should render App container 1`] = `
-<section>
-  <h1
-    className="earlyDawn"
-  >
-    Hi from test
-  </h1>
-  <button
-    onClick={[Function]}
-  >
-    Handshake
-  </button>
-</section>
+<Switch>
+  <Route
+    component={
+      Object {
+        "$$typeof": Symbol(react.forward_ref),
+        "load": [Function],
+        "preload": [Function],
+        "render": [Function],
+      }
+    }
+    exact={true}
+    path="/"
+  />
+  <Route
+    component={
+      Object {
+        "$$typeof": Symbol(react.forward_ref),
+        "load": [Function],
+        "preload": [Function],
+        "render": [Function],
+      }
+    }
+    exact={true}
+    path="/app"
+  />
+</Switch>
 `;

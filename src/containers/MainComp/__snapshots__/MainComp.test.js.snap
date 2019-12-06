@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Testing MainComp container... should render MainComp container 1`] = `
+<div>
+  <h1
+    className="earlyDawn"
+  >
+    Hi from test
+  </h1>
+  <button
+    onClick={[Function]}
+  >
+    Handshake
+  </button>
+  <Link
+    to="/app"
+  >
+    click
+  </Link>
+</div>
+`;

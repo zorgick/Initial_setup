@@ -10,6 +10,7 @@
     "typecss": "tcm --camelCase -p src/**/*.css",
     "test": "jest --watch",
     "test:build": "jest",
+    "test:debug": "node --inspect-brk node_modules/.bin/jest --runInBand ",
     "docs": "jsdoc2md"
   },
   "keywords": [],
@@ -20,6 +21,7 @@
     "url": "https://github.com/zorgick/Initial_setup.git"
   },
   "dependencies": {
+    "@loadable/component": "^5.11.0",
     "core-js": "^3.2.1",
     "history": "^4.10.1",
     "isomorphic-fetch": "^2.2.1",
@@ -39,6 +41,7 @@
   "devDependencies": {
     "@babel/cli": "^7.5.0",
     "@babel/core": "^7.5.4",
+    "@babel/node": "^7.7.4",
     "@babel/plugin-proposal-class-properties": "^7.5.0",
     "@babel/plugin-proposal-object-rest-spread": "^7.5.4",
     "@babel/plugin-syntax-dynamic-import": "^7.7.4",
@@ -113,6 +116,14 @@
           "@babel/plugin-transform-modules-commonjs"
         ],
         "sourceMaps": "inline"
+      },
+      "debug": {
+        "plugins": [
+          "@babel/plugin-transform-modules-commonjs",
+          "@babel/plugin-syntax-dynamic-import"
+        ],
+        "sourceMaps": "inline",
+        "retainLines": true
       }
     }
   },
@@ -176,7 +187,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm run typecss && lint-staged && npm run test:build"
+      "pre-commit": "npm run typecss && lint-staged"
     }
   }
 }

@@ -3,12 +3,12 @@ const PATH = require('path')
 const cp = require('child_process')
 
 const webpack = require('webpack')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
 const url = require('postcss-url')
 const cssPresetEnv = require('postcss-preset-env')
 const atImport = require('postcss-import')
 const flexbugs = require('postcss-flexbugs-fixes')
 const cssnano = require('cssnano')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
   .BundleAnalyzerPlugin

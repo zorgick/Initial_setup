@@ -10,16 +10,11 @@ describe('Testing App container...', () => {
   const wrappedMount = newProps => mountWrap(<App {...props} {...newProps} />)
 
   beforeEach(() => {
-    props = {
-      loadGreetings: jest.fn(),
-      hi: 'Hi from test'
-    }
+    props = {}
   })
 
   test('should render App container', () => {
     const wrapper = wrappedShallow()
     expect(wrapper).toMatchSnapshot()
   })
-
-  test('should handle click on the button', () => {})
 })
