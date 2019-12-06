@@ -22,8 +22,9 @@ const { NODE_ENV } = process.env
 /**
  * This function sets up the initial redux store based on the initial state and middlewares
  * @param {Object} [initialState] Initial state of the app
+ * @return {Object}
  */
-export default function configureStore (initialState) {
+function configureStore (initialState) {
   const middleware = [thunk]
 
   let createStoreWithMiddlewares
@@ -56,3 +57,5 @@ export default function configureStore (initialState) {
 
   return store
 }
+
+export default configureStore()

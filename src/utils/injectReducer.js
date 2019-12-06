@@ -1,5 +1,5 @@
 import createReducer from '../reducers'
-import { store } from '../index'
+import store from '../configureStore'
 
 /**
  * This function adds the async reducer, and creates a new combined reducer

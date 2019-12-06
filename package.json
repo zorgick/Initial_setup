@@ -68,7 +68,7 @@
     "html-webpack-plugin": "^3.2.0",
     "husky": "^3.0.0",
     "identity-obj-proxy": "^3.0.0",
-    "jest": "^24.8.0",
+    "jest": "^24.9.0",
     "jsdoc-to-markdown": "^5.0.3",
     "lint-staged": "^9.1.0",
     "postcss-flexbugs-fixes": "^4.1.0",
@@ -187,7 +187,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm run typecss && lint-staged"
+      "pre-commit": "npm run typecss && lint-staged && npm run test:build"
     }
   }
 }

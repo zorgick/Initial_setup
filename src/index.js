@@ -8,7 +8,7 @@ import App from 'containers/App'
 import { Provider } from 'react-redux'
 
 import history from 'utils/history'
-import configureStore from './configureStore'
+import store from './configureStore'
 import { consoleProxy } from 'prod-console'
 
 import './styles.css'
@@ -20,13 +20,11 @@ if (NODE_ENV === 'production') {
   prodConsole.switchConsole('off')
 }
 
-export const store = configureStore()
-
 ReactDOM.render(
   <Router history={history}>
     <Provider store={store}>
       <App />
     </Provider>
   </Router>,
-  document.getElementById('root') || document.createElement('div') // for testing purposes
+  document.getElementById('root')
 )
