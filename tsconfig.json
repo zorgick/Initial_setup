@@ -1,12 +1,15 @@
 {
   "compilerOptions": {
+    "rootDir": "./src",
     "outDir": "./dist", //Redirect output structure to the directory.
     "baseUrl": "./src",
-    "target": "es2015",
+    "target": "es6",
     "module": "commonjs",
+    "allowJs": true,
     "checkJs": true,
+    "noEmit": true,
     "jsx": "react"
   },
   "include": ["src/**/*"],
-  "exclude": ["node_modules", "**/node_modules/*", "dist"]
+  "exclude": ["node_modules", "**/node_modules/*", "dist", "**/*.test.js"]
 }

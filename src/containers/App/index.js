@@ -1,4 +1,4 @@
-import React from 'react'
+import * as React from 'react'
 // import PropTypes from 'prop-types'
 import { createStructuredSelector } from 'reselect'
 import { compose } from 'redux'
@@ -34,11 +34,6 @@ const MainComp = loadable(() =>
 )
 
 export class App extends React.PureComponent {
-  initiateHandshake = () => {
-    const { loadGreetings } = this.props
-    loadGreetings()
-  }
-
   render () {
     return (
       <Switch>
