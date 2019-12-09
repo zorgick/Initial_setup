@@ -2,6 +2,7 @@
 
 exports[`Testing MyComp container... should render MyComp container 1`] = `
 <div>
+  testHi
   <Link
     to="/"
   >

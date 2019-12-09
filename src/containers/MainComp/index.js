@@ -4,29 +4,35 @@ import { createStructuredSelector } from 'reselect'
 import { compose } from 'redux'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
+import { withTranslation } from 'react-i18next'
 
 import { selectGreetings } from './selectors'
 import { checkHandshake } from './actions'
 
 import styles from './styles.css'
 
-export function MainComp ({ loadGreetings, hi }) {
-  const initiateHandshake = () => {
-    loadGreetings()
+export class MainComp extends React.PureComponent {
+  handleHandshake = () => {
+    this.props.loadGreetings()
   }
 
-  return (
-    <div>
-      <h1 className={styles.earlyDawn}>{hi}</h1>
-      <button onClick={initiateHandshake}>Handshake</button>
-      <Link to='/app'>click</Link>
-    </div>
-  )
+  render () {
+    const { t, hi } = this.props
+
+    return (
+      <div>
+        <h1 className={styles.earlyDawn}>{t(`common.${hi}`)}</h1>
+        <button onClick={this.handleHandshake}>{t('common.handshake')}</button>
+        <Link to='/app'>{t('common.link')}</Link>
+      </div>
+    )
+  }
 }
 
 MainComp.propTypes = {
   hi: PropTypes.string,
-  loadGreetings: PropTypes.func
+  loadGreetings: PropTypes.func,
+  t: PropTypes.func
 }
 
 const mapStateToProps = createStructuredSelector({
@@ -44,4 +50,9 @@ const withConnect = connect(
   mapDispatchToProps
 )
 
-export default compose(withConnect)(MainComp)
+const withLanguage = withTranslation()
+
+export default compose(
+  withConnect,
+  withLanguage
+)(MainComp)

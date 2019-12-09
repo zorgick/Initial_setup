@@ -6,10 +6,12 @@ import ReactDOM from 'react-dom'
 import { Router } from 'react-router-dom'
 import App from 'containers/App'
 import { Provider } from 'react-redux'
+import { I18nextProvider } from 'react-i18next'
+import { consoleProxy } from 'prod-console'
 
 import history from 'utils/history'
+import i18n from 'utils/i18n.js'
 import store from './configureStore'
-import { consoleProxy } from 'prod-console'
 
 import './styles.css'
 
@@ -22,9 +24,11 @@ if (NODE_ENV === 'production') {
 
 ReactDOM.render(
   <Router history={history}>
-    <Provider store={store}>
-      <App />
-    </Provider>
+    <I18nextProvider i18n={i18n}>
+      <Provider store={store}>
+        <App />
+      </Provider>
+    </I18nextProvider>
   </Router>,
   document.getElementById('root')
 )

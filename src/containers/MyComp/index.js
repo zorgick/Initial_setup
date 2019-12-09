@@ -4,20 +4,25 @@ import { createStructuredSelector } from 'reselect'
 import { compose } from 'redux'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
+import { withTranslation } from 'react-i18next'
 
 import { selectSecondGreetings } from './selectors'
 
-export function MyComp ({ secondHi }) {
-  return (
-    <div>
-      {secondHi}
-      <Link to='/'>back</Link>
-    </div>
-  )
+export class MyComp extends React.PureComponent {
+  render () {
+    const { secondHi, t } = this.props
+    return (
+      <div>
+        {t(`common.${secondHi}`)}
+        <Link to='/'>{t('common.back')}</Link>
+      </div>
+    )
+  }
 }
 
 MyComp.propTypes = {
-  secondHi: PropTypes.string
+  secondHi: PropTypes.string,
+  t: PropTypes.func
 }
 
 const mapStateToProps = createStructuredSelector({
@@ -26,4 +31,9 @@ const mapStateToProps = createStructuredSelector({
 
 const withConnect = connect(mapStateToProps)
 
-export default compose(withConnect)(MyComp)
+const withLanguage = withTranslation()
+
+export default compose(
+  withConnect,
+  withLanguage
+)(MyComp)

@@ -10,12 +10,12 @@ exports[`Testing MainComp container... should render MainComp container 1`] = `
   <button
     onClick={[Function]}
   >
-    Handshake
+    handshake
   </button>
   <Link
     to="/app"
   >
-    click
+    link
   </Link>
 </div>
 `;

@@ -1,6 +1,6 @@
 import * as React from 'react'
 import {App} from './index'
-import {shallowWrap, mountWrap} from 'utils/contextWrap'
+import {shallowWrap, mountWrap} from 'utils/testUtils'
 
 describe('Testing App container...', () => {
   let props

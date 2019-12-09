@@ -1,6 +1,6 @@
 import * as React from 'react'
 import {MyComp} from './index'
-import {shallowWrap, mountWrap} from 'utils/contextWrap'
+import {shallowWrap, mountWrap, translateMock} from 'utils/testUtils'
 
 describe('Testing MyComp container...', () => {
   let props
@@ -11,7 +11,10 @@ describe('Testing MyComp container...', () => {
     mountWrap(<MyComp {...props} {...newProps} />)
 
   beforeEach(() => {
-    props = {}
+    props = {
+      secondHi: 'testHi',
+      t: jest.fn(translateMock)
+    }
   })
 
   test('should render MyComp container', () => {

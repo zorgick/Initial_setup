@@ -1,5 +1,5 @@
 import { shallow, mount } from 'enzyme'
-import history from './history'
+import history from '../history'
 import { shape } from 'prop-types'
 
 const router = {

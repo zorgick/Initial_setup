@@ -132,14 +132,16 @@ module.exports = {
   ...(NODE_ENV === 'development' && {
     devServer: {
       port: 3080,
+      contentBase: PATH.resolve(__dirname, 'dist'),
       historyApiFallback: {
         rewrites: [
           {
-            from: /^\/$/,
+            from: new RegExp(`^/${PROJECT}(/[a-z-/]+)?$`),
             to: `/${PROJECT}/index.html`
           }
         ]
       },
+      open: true,
       stats: {
         colors: true
       }

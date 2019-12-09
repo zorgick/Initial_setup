@@ -1,6 +1,6 @@
 import * as React from 'react'
 import {MainComp} from './index'
-import {shallowWrap, mountWrap} from 'utils/contextWrap'
+import {shallowWrap, mountWrap, translateMock} from 'utils/testUtils'
 
 describe('Testing MainComp container...', () => {
   let props
@@ -14,7 +14,8 @@ describe('Testing MainComp container...', () => {
   beforeEach(() => {
     props = {
       loadGreetings: jest.fn(),
-      hi: 'Hi from test'
+      hi: 'Hi from test',
+      t: jest.fn(translateMock)
     }
   })
 

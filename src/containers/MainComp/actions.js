@@ -4,5 +4,5 @@ import { createAction } from 'redux-actions'
 export const updateGreetings = createAction('UPDATE_GREETING')
 
 export const checkHandshake = () => async (dispatch, getState) => {
-  dispatch(updateGreetings('Hi to earthians!'))
+  dispatch(updateGreetings('hi to earthians!'))
 }
