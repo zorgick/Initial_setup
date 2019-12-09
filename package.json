@@ -7,15 +7,15 @@
     "build": "cross-env NODE_ENV=production webpack -p --progress",
     "build:analyze": "cross-env NODE_ENV=production DEBUG_BUNDLE=true webpack -p --progress",
     "start": "cross-env NODE_ENV=development webpack-dev-server -d --hot",
-    "typecss": "tcm --camelCase -p src/**/*.css",
+    "typejs": "tsc -p ./tsconfig.json",
     "test": "jest --watch",
     "test:build": "jest",
     "test:debug": "node --inspect-brk node_modules/.bin/jest --runInBand ",
     "release-patch": "npm version patch -m 'chore(*) patch version'",
     "release-minor": "npm version minor -m 'chore(*) minor version'",
     "release-major": "npm version major -m 'chore(*) major version'",
-    "type-it": "tsc -p ./tsconfig.json",
-    "docs": "jsdoc2md"
+    "docs": "jsdoc2md",
+    "checkall": "npm run typejs && lint-staged && npm run test:build"
   },
   "keywords": [],
   "author": "Zakhar Kononov (zorgizorgik@gmail.com)",
@@ -88,7 +88,6 @@
     "stylelint": "^10.1.0",
     "stylelint-config-standard": "^18.3.0",
     "svgo-loader": "^2.2.1",
-    "typed-css-modules": "^0.6.3",
     "typescript": "^3.7.3",
     "webpack": "^4.35.3",
     "webpack-bundle-analyzer": "^3.6.0",
@@ -194,7 +193,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm run typecss && lint-staged && npm run test:build"
+      "pre-commit": "npm run checkall"
     }
   }
 }
