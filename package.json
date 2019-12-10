@@ -30,7 +30,7 @@
     "history": "^4.10.1",
     "i18next": "^19.0.1",
     "i18next-browser-languagedetector": "^4.0.1",
-    "i18next-xhr-backend": "^3.2.2",
+    "i18next-fetch-backend": "^2.2.0",
     "isomorphic-fetch": "^2.2.1",
     "prod-console": "^1.0.0",
     "prop-types": "^15.7.2",

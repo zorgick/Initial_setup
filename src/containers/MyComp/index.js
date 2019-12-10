@@ -31,7 +31,7 @@ const mapStateToProps = createStructuredSelector({
 
 const withConnect = connect(mapStateToProps)
 
-const withLanguage = withTranslation()
+const withLanguage = withTranslation('common')
 
 export default compose(
   withConnect,

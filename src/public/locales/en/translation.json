@@ -2,9 +2,7 @@
   "common": {
     "hello to marsians!": "Hello to marsians!",
     "hi to earthians!": "Hi to earthians!",
-    "Oh, hi, Mark!": "Oh, hi, Mark!",
     "handshake": "Handshake",
-    "link": "Click",
-    "back": "Back"
+    "link": "Click"
   }
 }
