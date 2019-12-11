@@ -3,41 +3,26 @@ import { initReactI18next } from 'react-i18next'
 import LanguageDetector from 'i18next-browser-languagedetector'
 import fetch from 'i18next-fetch-backend'
 
-import * as translationEN from '../public/locales/en/translation.json'
-import * as commonEN from '../public/locales/en/common.json'
-import * as translationRU from '../public/locales/ru/translation.json'
-import * as commonRU from '../public/locales/ru/common.json'
+const { NODE_ENV, COMMIT } = process.env
+const cacheKey = COMMIT.slice(0, 20)
 
-const { NODE_ENV } = process.env
-
-// the translations
-const resources = {
-  en: {
-    translation: translationEN,
-    common: commonEN
-  },
-  ru: {
-    translation: translationRU,
-    common: commonRU
-  }
+const backendOpts = {
+  loadPath: `http://localhost:7000/locales/{{lng}}/{{ns}}.json${
+    cacheKey ? '?' + cacheKey : ''
+  }`
 }
-
-// const backendOpts = {
-//   loadPath: 'http://localhost:3080/initial-setup/public/locales/{{lng}}/{{ns}}.json'
-// }
 
 i18n
   .use(fetch)
   .use(LanguageDetector)
   .use(initReactI18next)
   .init({
-    // backend: backendOpts,
+    backend: backendOpts,
     debug: NODE_ENV === 'development' && true,
-    fallbackLng: 'en',
+    fallbackLng: 'ru',
     load: 'languageOnly',
-    resources,
     react: {
-      wait: false,
+      wait: true,
       useSuspense: false,
       bindI18n: 'languageChanged loaded',
       bindStore: 'added removed',
