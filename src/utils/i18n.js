@@ -1,19 +1,21 @@
+import fetch from 'isomorphic-fetch'
 import i18n from 'i18next'
 import { initReactI18next } from 'react-i18next'
 import LanguageDetector from 'i18next-browser-languagedetector'
-import fetch from 'i18next-fetch-backend'
+import i18nFetch from 'i18next-fetch-backend'
 
 const { NODE_ENV, COMMIT } = process.env
 const cacheKey = COMMIT.slice(0, 20)
 
 const backendOpts = {
-  loadPath: `http://localhost:7000/locales/{{lng}}/{{ns}}.json${
+  loadPath: `http://localhost:8070/locales/{{lng}}/{{ns}}.json${
     cacheKey ? '?' + cacheKey : ''
-  }`
+  }`,
+  fetch // use isomorphic fetch in case of ssr
 }
 
 i18n
-  .use(fetch)
+  .use(i18nFetch)
   .use(LanguageDetector)
   .use(initReactI18next)
   .init({

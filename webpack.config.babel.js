@@ -13,17 +13,26 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
   .BundleAnalyzerPlugin
 
-const commit = cp
-  .execSync('git rev-parse HEAD')
-  .toString()
-  .trim()
+const { DEBUG_BUNDLE, NODE_ENV } = process.env
+const PROJECT = 'initial-setup'
+
+/**
+ * Gets a random string in dev or a substring from the hash of the commit in
+ * prod
+ * Usage: mostly for browser caching of static resources
+ */
+const commit =
+  NODE_ENV === 'development'
+    ? '' + Math.floor(Math.random() * 10000)
+    : cp
+      .execSync('git rev-parse HEAD')
+      .toString()
+      .trim()
+
 const version = cp
   .execSync('git describe --abbrev=0 --tags')
   .toString()
   .trim()
-
-const { DEBUG_BUNDLE, NODE_ENV } = process.env
-const PROJECT = 'initial-setup'
 
 module.exports = {
   entry: {
