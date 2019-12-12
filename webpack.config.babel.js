@@ -15,7 +15,7 @@ const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
 
 const { DEBUG_BUNDLE, NODE_ENV } = process.env
 const PROJECT = 'initial-setup'
-
+const modulesCssPattern = /node_modules\/.*.css$/i
 /**
  * Gets a random string in dev or a substring from the hash of the commit in
  * prod
@@ -65,6 +65,10 @@ module.exports = {
       },
       {
         test: /\.css$/,
+        /**
+         * skip node_modules .css files
+         */
+        exclude: modulesCssPattern,
         use: [
           'style-loader',
           {
@@ -82,6 +86,39 @@ module.exports = {
                 atImport({
                   path: './src'
                 }),
+                url({
+                  url: 'inline'
+                }),
+                cssPresetEnv,
+                cssnano,
+                flexbugs
+              ]
+            }
+          }
+        ]
+      },
+      {
+        /**
+         * load node_modules .css files without changing
+         * their class names
+         */
+        test: modulesCssPattern, //
+        use: [
+          'style-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              modules: {
+                mode: 'global'
+              },
+              importLoaders: 1
+            }
+          },
+          {
+            loader: 'postcss-loader',
+            options: {
+              ident: 'by-ident',
+              plugins: () => [
                 url({
                   url: 'inline'
                 }),
@@ -150,7 +187,6 @@ module.exports = {
           }
         ]
       },
-      open: true,
       stats: {
         colors: true
       }
