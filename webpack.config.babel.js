@@ -108,9 +108,7 @@ module.exports = {
           {
             loader: 'css-loader',
             options: {
-              modules: {
-                mode: 'global'
-              },
+              modules: false,
               importLoaders: 1
             }
           },
