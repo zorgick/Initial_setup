@@ -17,17 +17,13 @@ const { DEBUG_BUNDLE, NODE_ENV } = process.env
 const PROJECT = 'initial-setup'
 const modulesCssPattern = /node_modules\/.*.css$/i
 /**
- * Gets a random string in dev or a substring from the hash of the commit in
- * prod
+ * Gets a random string from the hash of the commit
  * Usage: mostly for browser caching of static resources
  */
-const commit =
-  NODE_ENV === 'development'
-    ? '' + Math.floor(Math.random() * 10000)
-    : cp
-      .execSync('git rev-parse HEAD')
-      .toString()
-      .trim()
+const commit = cp
+  .execSync('git rev-parse HEAD')
+  .toString()
+  .trim()
 
 const version = cp
   .execSync('git describe --abbrev=0 --tags')

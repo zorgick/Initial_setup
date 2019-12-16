@@ -30,9 +30,20 @@ function configureStore (initialState) {
   let createStoreWithMiddlewares
   if (NODE_ENV === 'development') {
     const createLogger = require('redux-logger').createLogger // eslint-disable-line global-require
+    const reduxImmutableStateInvariant = require('redux-immutable-state-invariant')
+      .default // eslint-disable-line global-require
 
     createStoreWithMiddlewares = compose(
-      applyMiddleware(...middleware, createLogger()),
+      applyMiddleware(
+        ...middleware,
+        createLogger(),
+        /**
+         * reduxImmutableStateInvariant spits an error when you
+         * try to mutate your state either inside a dispatch or
+         * between dispatches
+         */
+        reduxImmutableStateInvariant()
+      ),
       window.__REDUX_DEVTOOLS_EXTENSION__ &&
         window.__REDUX_DEVTOOLS_EXTENSION__()
     )(createStore)

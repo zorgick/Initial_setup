@@ -1,3 +1,5 @@
-import { createBrowserHistory } from 'history'
+import { createBrowserHistory, createMemoryHistory } from 'history'
 
-export default createBrowserHistory()
+export default typeof window === 'object'
+  ? createBrowserHistory()
+  : createMemoryHistory()
