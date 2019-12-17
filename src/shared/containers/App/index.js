@@ -5,30 +5,30 @@ import { compose } from 'redux'
 import { Switch, Route } from 'react-router-dom'
 import { connect } from 'react-redux'
 import loadable from '@loadable/component'
-import injectReducer from 'utils/injectReducer'
+import injectReducer from 'shared/utils/injectReducer'
 
 const NewComp = loadable(() =>
-  import(/*  webpackChunkName: "my-comp" */ 'containers/MyComp/reducer').then(
-    module => {
-      injectReducer('my', module.default)
+  import(
+    /*  webpackChunkName: "my-comp" */ 'shared/containers/MyComp/reducer'
+  ).then(module => {
+    injectReducer('my', module.default)
 
-      return import(
-        /*  webpackChunkName: "my-comp" */
-        'containers/MyComp'
-      )
-    }
-  )
+    return import(
+      /*  webpackChunkName: "my-comp" */
+      'shared/containers/MyComp'
+    )
+  })
 )
 
 const MainComp = loadable(() =>
   import(
-    /*  webpackChunkName: "main-comp" */ 'containers/MainComp/reducer'
+    /*  webpackChunkName: "main-comp" */ 'shared/containers/MainComp/reducer'
   ).then(module => {
     injectReducer('main', module.default)
 
     return import(
       /*  webpackChunkName: "main-comp" */
-      'containers/MainComp'
+      'shared/containers/MainComp'
     )
   })
 )
@@ -52,9 +52,6 @@ function mapDispatchToProps (dispatch) {
   return {}
 }
 
-const withConnect = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)
+const withConnect = connect(mapStateToProps, mapDispatchToProps)
 
 export default compose(withConnect)(App)

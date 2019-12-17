@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux'
-import appReducer from './containers/App/reducer'
+import appReducer from 'shared/containers/App/reducer'
 
 /**
  * This function initializes reducer's dictionary and updates the latter with

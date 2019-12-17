@@ -45,14 +45,8 @@ function mapDispatchToProps (dispatch) {
   }
 }
 
-const withConnect = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)
+const withConnect = connect(mapStateToProps, mapDispatchToProps)
 
 const withLanguage = withTranslation()
 
-export default compose(
-  withConnect,
-  withLanguage
-)(MainComp)
+export default compose(withConnect, withLanguage)(MainComp)

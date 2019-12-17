@@ -1,6 +1,6 @@
 import * as React from 'react'
 import {MainComp} from './index'
-import {shallowWrap, mountWrap, translateMock} from 'utils/testUtils'
+import {shallowWrap, mountWrap, translateMock} from 'shared/utils/testUtils'
 
 describe('Testing MainComp container...', () => {
   let props

@@ -1,7 +1,7 @@
 // @ts-nocheck
 import { createStore, applyMiddleware, compose } from 'redux'
 import thunk from 'redux-thunk'
-import createReducer from './reducers'
+import createReducer from 'shared/reducers'
 
 /**
  * @typedef {Object} ReduxStore

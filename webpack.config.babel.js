@@ -16,8 +16,9 @@ const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
 const { DEBUG_BUNDLE, NODE_ENV } = process.env
 const PROJECT = 'initial-setup'
 const modulesCssPattern = /node_modules\/.*.css$/i
+
 /**
- * Gets a random string from the hash of the commit
+ * Gets a string from the hash of the commit
  * Usage: mostly for browser caching of static resources
  */
 const commit = cp
@@ -31,15 +32,24 @@ const version = cp
   .trim()
 
 module.exports = {
+  /**
+   * Entry plugin
+   */
   entry: {
-    app: './src/index'
+    app: './src/browser/index'
   },
+  /**
+   * Output plugin
+   */
   output: {
     filename: 'chunk.[name].js?[hash]',
     chunkFilename: 'chunk.[name].js?[chunkhash]',
     path: PATH.resolve(__dirname, 'dist'),
     publicPath: `/${PROJECT}/`
   },
+  /**
+   * Optimization plugin
+   */
   optimization: {
     runtimeChunk: false,
     splitChunks: {
@@ -52,11 +62,17 @@ module.exports = {
       }
     }
   },
+  /**
+   * Module plugin
+   */
   module: {
     rules: [
       {
         test: /\.js$/,
-        include: PATH.resolve(__dirname, 'src'),
+        include: [
+          PATH.resolve(__dirname, 'src/browser'),
+          PATH.resolve(__dirname, 'src/shared')
+        ],
         loader: 'babel-loader'
       },
       {
@@ -71,7 +87,7 @@ module.exports = {
             loader: 'css-loader',
             options: {
               modules: true,
-              importLoaders: 1
+              importLoaders: 0
             }
           },
           {
@@ -146,9 +162,15 @@ module.exports = {
       }
     ]
   },
+  /**
+   * Module resolution plugin
+   */
   resolve: {
     modules: ['node_modules', PATH.resolve(__dirname, 'src')]
   },
+  /**
+   * Custom plugins
+   */
   plugins: [
     new webpack.DefinePlugin({
       'process.env': {
@@ -157,18 +179,28 @@ module.exports = {
         VERSION: JSON.stringify(version)
       }
     }),
+
     new webpack.optimize.ModuleConcatenationPlugin(),
+
     new HtmlWebpackPlugin({
-      template: './src/index.html',
+      template: './src/browser/index.html',
       title: PROJECT,
       chunks: ['runtime~app', 'vendors', 'app']
     }),
+
     NODE_ENV === 'production' && new CleanWebpackPlugin(),
+
     DEBUG_BUNDLE && new BundleAnalyzerPlugin()
   ].filter(Boolean),
+  /**
+   * Source map plugin
+   */
   ...(NODE_ENV === 'production' && {
     devtool: 'source-map'
   }),
+  /**
+   * devServer plugin
+   */
   ...(NODE_ENV === 'development' && {
     devServer: {
       port: 3080,

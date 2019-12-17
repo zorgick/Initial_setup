@@ -33,7 +33,4 @@ const withConnect = connect(mapStateToProps)
 
 const withLanguage = withTranslation('common')
 
-export default compose(
-  withConnect,
-  withLanguage
-)(MyComp)
+export default compose(withConnect, withLanguage)(MyComp)

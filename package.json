@@ -10,7 +10,7 @@
     "typejs": "tsc -p ./tsconfig.json",
     "test": "jest --watch",
     "test:build": "jest",
-    "test:debug": "node --inspect-brk node_modules/.bin/jest --runInBand ",
+    "test:debug": "node --inspect-brk node_modules/.bin/jest --runInBand",
     "release-patch": "npm version patch -m 'chore(*) patch version'",
     "release-minor": "npm version minor -m 'chore(*) minor version'",
     "release-major": "npm version major -m 'chore(*) major version'",
@@ -140,7 +140,7 @@
     "verbose": true,
     "collectCoverage": true,
     "collectCoverageFrom": [
-      "src/**/*.{js,jsx}"
+      "src/**/*.js"
     ],
     "setupFilesAfterEnv": [
       "<rootDir>/jestSetup.js"
