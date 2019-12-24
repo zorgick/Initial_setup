@@ -31,6 +31,7 @@
     "@hapi/inert": "^5.2.2",
     "@hapi/joi": "^16.1.8",
     "@loadable/component": "^5.11.0",
+    "chalk": "^3.0.0",
     "core-js": "^3.5.0",
     "history": "^4.10.1",
     "i18next": "^19.0.2",
@@ -69,7 +70,9 @@
     "babel-jest": "^24.9.0",
     "babel-loader": "^8.0.6",
     "browser-env": "^3.3.0",
+    "case-sensitive-paths-webpack-plugin": "^2.2.0",
     "clean-webpack-plugin": "^3.0.0",
+    "copy-webpack-plugin": "^5.1.1",
     "cross-env": "^5.2.1",
     "css-loader": "^3.3.2",
     "cssnano": "^4.1.10",
@@ -81,6 +84,7 @@
     "html-webpack-plugin": "^3.2.0",
     "husky": "^3.1.0",
     "identity-obj-proxy": "^3.0.0",
+    "isomorphic-style-loader": "^5.1.0",
     "jest": "^24.9.0",
     "jsdoc-to-markdown": "^5.0.3",
     "lint-staged": "^9.5.0",
@@ -92,6 +96,7 @@
     "prettier": "^1.19.1",
     "redux-immutable-state-invariant": "^2.1.0",
     "redux-logger": "^3.0.6",
+    "rimraf": "^3.0.0",
     "standard": "^14.3.1",
     "style-loader": "^0.23.1",
     "stylelint": "^10.1.0",
@@ -101,7 +106,9 @@
     "webpack": "^4.41.3",
     "webpack-bundle-analyzer": "^3.6.0",
     "webpack-cli": "^3.3.10",
-    "webpack-dev-server": "^3.9.0"
+    "webpack-dev-server": "^3.9.0",
+    "webpack-manifest-plugin": "^2.2.0",
+    "write-file-webpack-plugin": "^4.5.1"
   },
   "babel": {
     "presets": [
@@ -168,6 +175,10 @@
     "parser": "babel-eslint",
     "ignore": [
       "src/**/*.test.js"
+    ],
+    "globals": [
+      "__BROWSER__",
+      "__SERVER__"
     ]
   },
   "prettier": {
