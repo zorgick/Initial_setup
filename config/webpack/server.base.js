@@ -1,5 +1,6 @@
 const PATH = require('path')
 const nodeExternals = require('webpack-node-externals')
+
 const paths = require('config/paths')
 const { server: serverLoaders } = require('./loaders')
 const resolvers = require('./resolvers')

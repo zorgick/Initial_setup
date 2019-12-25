@@ -5,8 +5,9 @@ const ManifestPlugin = require('webpack-manifest-plugin')
 const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CopyPlugin = require('copy-webpack-plugin')
-const paths = require('config/paths')
+
 const { clientOnly } = require('scripts/utils')
+const paths = require('config/paths')
 const envBuilder = require('config/env')
 
 const env = envBuilder()

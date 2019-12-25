@@ -19,14 +19,14 @@ const compilerPromise = (name, compiler) => {
     })
     compiler.hooks.done.tap(name, stats => {
       if (!stats.hasErrors()) {
-        return resolve(logMessage(`[${name}] is successfully compiled `))
+        return resolve(logMessage(`[${name}] Compiled successfully`))
       }
       return reject(new Error(`Failed to compile ${name}`))
     })
   })
 }
 
-const clientOnly = () => process.argv.includes('--client-only')
+const clientOnly = () => process.argv.includes('--pl')
 
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
 

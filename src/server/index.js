@@ -1,58 +1,38 @@
-'use strict'
-
-const Hapi = require('@hapi/hapi')
-// const Crumb = require('@hapi/crumb')
-const Boom = require('@hapi/boom')
-const Inert = require('@hapi/inert')
+// import React = require('react')
 const PATH = require('path')
-const userRoutes = require('server/routes/users')
-const translationsRoutes = require('server/routes/translations')
+const express = require('express')
+const cors = require('cors')
+const chalk = require('chalk')
+const bodyParser = require('body-parser')
+const { getTraslation } = require('server/mdwr/i18nBackend')
+const paths = require('../../config/paths')
 
-const { HOST = 'localhost', PORT = 8070 } = process.env
+require('dotenv').config()
 
-const init = async () => {
-  const server = Hapi.server({
-    port: PORT,
-    host: HOST,
-    routes: {
-      // enable CORS
-      cors: true,
-      validate: {
-        /**
-         * Make this the default handler for validation failures. That
-         * means anytime a user submits data that doesn't pass
-         * validaiton, this functions handles it.
-         */
-        failAction: async (request, h, err) => {
-          throw Boom.badRequest(err.message)
-        }
-      },
-      files: {
-        relativeTo: PATH.join(__dirname, 'public')
-      }
-    }
-  })
+const app = express()
 
-  server.route({
-    method: 'GET',
-    path: '/monitor',
-    handler: (request, h) => {
-      return h.response({ message: 'Hello World!' }).type('application/json')
-    }
-  })
-
-  /**
-   * this needs to finish before server.start()
-   */
-  await server.register([Inert, userRoutes, translationsRoutes])
-
-  await server.start()
-  console.log('Server running on %s', server.info.uri)
+// For production use Nginx for static assets
+if (process.env.NODE_ENV === 'development') {
+  app.use(
+    paths.publicPath,
+    express.static(PATH.join(paths.clientBuild, paths.publicPath))
+  )
 }
+console.log(process.env.NODE_ENV)
 
-process.on('unhandledRejection', err => {
-  console.log(err)
-  process.exit(1)
+app.use(cors())
+
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true }))
+
+// Better with Nginx as well:
+app.get('/locales/:locale/:ns.json', getTraslation)
+
+app.listen(process.env.PORT || 8500, () => {
+  console.log(
+    `[${new Date().toISOString()}]`,
+    chalk.blue(`App is running: http://localhost:${process.env.PORT || 8500}`)
+  )
 })
 
-init()
+module.exports = app

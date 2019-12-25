@@ -3,11 +3,11 @@ const webpack = require('webpack')
 const chalk = require('chalk')
 const webpackDevMiddleware = require('webpack-dev-middleware')
 const webpackHotMiddleware = require('webpack-hot-middleware')
+
 const getConfig = require('config/webpack')
-const { compilerPromise } = require('scripts/utils')
 const paths = require('config/paths')
-const { logMessage } = require('scripts/utils')
 const envBuilder = require('config/env')
+const { compilerPromise, logMessage } = require('scripts/utils')
 
 const { raw } = envBuilder()
 const { PORT, HOST, NODE_ENV } = raw

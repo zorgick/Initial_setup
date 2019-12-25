@@ -3,7 +3,6 @@ const TerserPlugin = require('terser-webpack-plugin')
 const paths = require('config/paths')
 const resolvers = require('./resolvers')
 const plugins = require('./plugins')
-// const { client: clientLoaders } = require('./loaders');
 const { client: clientLoaders } = require('./loaders')
 
 module.exports = {
