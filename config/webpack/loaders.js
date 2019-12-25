@@ -3,6 +3,7 @@ const url = require('postcss-url')
 const cssPresetEnv = require('postcss-preset-env')
 const flexbugs = require('postcss-flexbugs-fixes')
 const cssnano = require('cssnano')
+const atImport = require('postcss-import')
 
 const { NODE_ENV } = process.env
 
@@ -50,6 +51,9 @@ const cssModuleLoader = {
       options: {
         ident: 'by-ident',
         plugins: () => [
+          atImport({
+            path: './src/shared'
+          }),
           url({
             url: 'inline'
           }),

@@ -96,7 +96,7 @@ module.exports = {
               ident: 'by-ident',
               plugins: () => [
                 atImport({
-                  path: './src'
+                  path: './src/shared'
                 }),
                 url({
                   url: 'inline'

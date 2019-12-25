@@ -4,8 +4,11 @@ import { createStructuredSelector } from 'reselect'
 import { compose } from 'redux'
 import { Switch, Route } from 'react-router-dom'
 import { connect } from 'react-redux'
+import withStyles from 'isomorphic-style-loader/withStyles'
 import loadable from '@loadable/component'
+
 import injectReducer from 'shared/utils/injectReducer'
+import styles from './styles.css'
 
 const NewComp = loadable(() =>
   import(
@@ -53,5 +56,5 @@ function mapDispatchToProps (dispatch) {
 }
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps)
-
-export default compose(withConnect)(App)
+// @ts-ignore
+export default compose(withConnect, withStyles(styles))(App)

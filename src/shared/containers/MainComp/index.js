@@ -5,6 +5,7 @@ import { compose } from 'redux'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { withTranslation } from 'react-i18next'
+import withStyles from 'isomorphic-style-loader/withStyles'
 
 import { selectGreetings } from './selectors'
 import { checkHandshake } from './actions'
@@ -46,7 +47,6 @@ function mapDispatchToProps (dispatch) {
 }
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps)
-
 const withLanguage = withTranslation()
 
-export default compose(withConnect, withLanguage)(MainComp)
+export default compose(withConnect, withStyles(styles), withLanguage)(MainComp)
