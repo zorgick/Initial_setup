@@ -1,13 +1,13 @@
 const webpack = require('webpack')
 const WriteFileWebpackPlugin = require('write-file-webpack-plugin')
-const baseConfig = require('./client.base')
+const baseConfig = require('./server.base')
 
 const config = {
   ...baseConfig,
   plugins: [
     new WriteFileWebpackPlugin(),
-    new webpack.HotModuleReplacementPlugin(),
-    ...baseConfig.plugins
+    ...baseConfig.plugins,
+    new webpack.HotModuleReplacementPlugin()
   ],
   mode: 'development',
   performance: {

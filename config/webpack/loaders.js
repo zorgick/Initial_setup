@@ -1,9 +1,8 @@
 // @ts-nocheck
-import url from 'postcss-url'
-import cssPresetEnv from 'postcss-preset-env'
-// import atImport from 'postcss-import'
-import flexbugs from 'postcss-flexbugs-fixes'
-import cssnano from 'cssnano'
+const url = require('postcss-url')
+const cssPresetEnv = require('postcss-preset-env')
+const flexbugs = require('postcss-flexbugs-fixes')
+const cssnano = require('cssnano')
 
 const { NODE_ENV } = process.env
 
@@ -84,7 +83,7 @@ const fileLoaderClient = {
 const fileLoaderServer = { ...fileLoaderClient }
 fileLoaderServer.use[0].options.emitFile = false
 
-export const client = [
+const client = [
   {
     oneOf: [
       htmlLoader,
@@ -96,10 +95,10 @@ export const client = [
   }
 ]
 
-export const server = [
+const server = [
   {
     oneOf: [babelLoader, cssModuleLoader, cssLoader, fileLoaderServer]
   }
 ]
 
-export default { client, server }
+module.exports = { client, server }

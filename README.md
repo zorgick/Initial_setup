@@ -1,8 +1,7 @@
 # How to start
 
-1. npm run build
-2. Download the [server](https://github.com/zorgick/serverLaMetrage) and npm start it (all transalations are there) or you can opt to adding translation resources into this project directly - change the i18next config in this case
-3. npm start 
+1. npm run postinstall - this will create symlinks for the modules (npm start launches node that doesn't know by default where your modules are located)
+2.  
 
 # Code of conduct
 

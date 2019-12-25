@@ -6,7 +6,7 @@
   "scripts": {
     "build": "cross-env NODE_ENV=production webpack -p --progress",
     "build:analyze": "cross-env NODE_ENV=production DEBUG_BUNDLE=true webpack -p --progress",
-    "start": "cross-env NODE_ENV=development webpack-dev-server -d --hot",
+    "start": "cross-env NODE_ENV=development node scripts/start --client-only",
     "typejs": "tsc -p ./tsconfig.json",
     "test": "jest --watch",
     "test:build": "jest",
@@ -15,7 +15,8 @@
     "release-minor": "npm version minor -m 'chore(*) minor version'",
     "release-major": "npm version major -m 'chore(*) major version'",
     "docs": "jsdoc2md",
-    "checkall": "npm run typejs && lint-staged && npm run test:build"
+    "checkall": "npm run typejs && lint-staged && npm run test:build",
+    "postinstall": "link-module-alias"
   },
   "keywords": [],
   "author": "Zakhar Kononov (zorgizorgik@gmail.com)",
@@ -33,6 +34,7 @@
     "@loadable/component": "^5.11.0",
     "chalk": "^3.0.0",
     "core-js": "^3.5.0",
+    "express": "^4.17.1",
     "history": "^4.10.1",
     "i18next": "^19.0.2",
     "i18next-browser-languagedetector": "^4.0.1",
@@ -87,6 +89,7 @@
     "isomorphic-style-loader": "^5.1.0",
     "jest": "^24.9.0",
     "jsdoc-to-markdown": "^5.0.3",
+    "link-module-alias": "^1.2.0",
     "lint-staged": "^9.5.0",
     "postcss-flexbugs-fixes": "^4.1.0",
     "postcss-import": "^12.0.1",
@@ -106,9 +109,16 @@
     "webpack": "^4.41.3",
     "webpack-bundle-analyzer": "^3.6.0",
     "webpack-cli": "^3.3.10",
+    "webpack-dev-middleware": "^3.7.2",
     "webpack-dev-server": "^3.9.0",
+    "webpack-hot-middleware": "^2.25.0",
     "webpack-manifest-plugin": "^2.2.0",
+    "webpack-node-externals": "^1.7.2",
     "write-file-webpack-plugin": "^4.5.1"
+  },
+  "_moduleAliases": {
+    "scripts": "./scripts",
+    "config": "./config"
   },
   "babel": {
     "presets": [

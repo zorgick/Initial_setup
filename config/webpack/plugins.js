@@ -1,19 +1,19 @@
-import * as PATH from 'path'
-import * as webpack from 'webpack'
-import ManifestPlugin from 'webpack-manifest-plugin'
-// import MiniCssExtractPlugin from 'mini-css-extract-plugin';
-import CaseSensitivePathsPlugin from 'case-sensitive-paths-webpack-plugin'
-import HtmlWebpackPlugin from 'html-webpack-plugin'
-import CopyPlugin from 'copy-webpack-plugin'
-import paths from 'config/paths'
-import { clientOnly } from 'scripts/utils'
-import envBuilder from 'config/env'
+const PATH = require('path')
+const webpack = require('webpack')
+const ManifestPlugin = require('webpack-manifest-plugin')
+// const MiniCssExtractPlugin = require('mini-css-extract-plugin';)
+const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const CopyPlugin = require('copy-webpack-plugin')
+const paths = require('config/paths')
+const { clientOnly } = require('scripts/utils')
+const envBuilder = require('config/env')
 
 const env = envBuilder()
 
 const isProfilerEnabled = () => process.argv.includes('--profile')
 
-export const shared = [
+const shared = [
   // new MiniCssExtractPlugin({
   //   filename:
   //     env.raw.NODE_ENV === 'development' ? '[name].css' : '[name].[contenthash].css',
@@ -22,7 +22,7 @@ export const shared = [
   // }),
 ]
 
-export const client = [
+const client = [
   /**
    * Do not generate html file if ssr is enabled
    */
@@ -42,7 +42,7 @@ export const client = [
   isProfilerEnabled() && new webpack.debug.ProfilingPlugin()
 ].filter(Boolean)
 
-export const server = [
+const server = [
   new webpack.DefinePlugin({
     __SERVER__: 'true',
     __BROWSER__: 'false'
@@ -63,7 +63,7 @@ export const server = [
   ])
 ]
 
-export default {
+module.exports = {
   shared,
   client,
   server

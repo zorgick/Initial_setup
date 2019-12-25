@@ -1,6 +1,6 @@
-import rimraf from 'rimraf'
-import paths from 'config/paths'
-import { clientOnly } from 'scripts/utils'
+const rimraf = require('rimraf')
+const paths = require('config/paths')
+const { clientOnly } = require('scripts/utils')
 
 rimraf.sync(paths.clientBuild)
 rimraf.sync(paths.serverBuild)

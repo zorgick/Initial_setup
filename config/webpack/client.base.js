@@ -1,16 +1,20 @@
-import * as PATH from 'path'
-import TerserPlugin from 'terser-webpack-plugin'
-import paths from 'config/paths'
-import resolvers from './resolvers'
-import plugins from './plugins'
+const PATH = require('path')
+const TerserPlugin = require('terser-webpack-plugin')
+const paths = require('config/paths')
+const resolvers = require('./resolvers')
+const plugins = require('./plugins')
 // const { client: clientLoaders } = require('./loaders');
-import { client as clientLoaders } from './loaders'
+const { client: clientLoaders } = require('./loaders')
 
-export default {
+module.exports = {
   name: 'client',
   target: 'web',
   entry: {
-    app: paths.srcClient
+    app: [
+      require.resolve('core-js/stable'),
+      require.resolve('regenerator-runtime/runtime'),
+      PATH.resolve(paths.srcClient, 'index.js')
+    ]
   },
   output: {
     path: PATH.join(paths.clientBuild, paths.publicPath),

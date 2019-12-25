@@ -1,20 +1,22 @@
-import * as PATH from 'path'
-import * as FS from 'fs'
+const PATH = require('path')
+const FS = require('fs')
 
 const appDirectory = FS.realpathSync(process.cwd())
 const resolveApp = relativePath => PATH.resolve(appDirectory, relativePath)
 
 /**
  * @typedef {Object} Structure
- * @property {string} appHtml HTML template for client-only build
- * @property {string} clientBuild Client side bundled code
- * @property {string} serverBuild Server side bundled code
- * @property {string} dotenv Environment variables
- * @property {string} src Source directory
- * @property {string} srcClient Module with the client side code
- * @property {string} srcServer Module with the server side code
- * @property {string} srcShared Module with the common code
- * @property {string} locales Directory with translations
+ * @property {string} appHtml Path to HTML template for client-only build
+ * @property {string} clientBuild Path to client side bundled code
+ * @property {string} serverBuild Path to server side bundled code
+ * @property {string} dotenv Path to environment variables
+ * @property {string} src Path to source directory
+ * @property {string} srcClient Path to the source of the client side code
+ * @property {string} srcServer Path to the source of the server side code
+ * @property {string} srcShared Path to the source of the shared code
+ * @property {string} locales Path to the translations
+ * @property {string} scripts Path to the scripts directory
+ * @property {string} config Path to the config directory
  * @property {string} publicPath Main URL path
  * @property {Object[]} [resolveModules] List of modules
  */
@@ -32,6 +34,8 @@ const paths = {
   srcServer: resolveApp('src/server'),
   srcShared: resolveApp('src/shared'),
   locales: resolveApp('src/shared/i18n/locales'),
+  scripts: resolveApp('scripts'),
+  config: resolveApp('config'),
   publicPath: '/initial-setup/'
 }
 
@@ -40,7 +44,9 @@ paths.resolveModules = [
   paths.srcServer,
   paths.srcShared,
   paths.src,
+  paths.config,
+  paths.scripts,
   'node_modules'
 ]
 
-export default paths
+module.exports = paths
