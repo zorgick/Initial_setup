@@ -1,7 +1,6 @@
 const FS = require('fs')
 
 const localesDir = `${__dirname}/locales`
-console.log(localesDir)
 
 // This middleware serves translation files requested via /locales/:locale/:ns
 const getTraslation = (req, res) => {

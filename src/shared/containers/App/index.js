@@ -23,7 +23,7 @@ const NewComp = loadable(() =>
   })
 )
 
-const MainComp = loadable(() =>
+const MainComp = loadable(props =>
   import(
     /*  webpackChunkName: "main-comp" */ 'shared/containers/MainComp/reducer'
   ).then(module => {

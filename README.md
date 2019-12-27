@@ -1,7 +1,6 @@
 # How to start
 
-1. npm run postinstall - this will create symlinks for the modules (npm start launches node that doesn't know by default where your modules are located)
-2.  
+1.  
 
 # Code of conduct
 

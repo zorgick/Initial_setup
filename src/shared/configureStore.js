@@ -2,6 +2,7 @@
 import { createStore, applyMiddleware, compose } from 'redux'
 import thunk from 'redux-thunk'
 import createReducer from 'shared/reducers'
+import { WINDOW_STORE } from 'shared/utils/constants'
 
 /**
  * @typedef {Object} ReduxStore
@@ -24,6 +25,7 @@ const { NODE_ENV } = process.env
  * @param {Object} [initialState] Initial state of the app
  * @return {Object}
  */
+
 function configureStore (initialState) {
   const middleware = [thunk]
 
@@ -43,9 +45,7 @@ function configureStore (initialState) {
          * between dispatches
          */
         reduxImmutableStateInvariant()
-      ),
-      window.__REDUX_DEVTOOLS_EXTENSION__ &&
-        window.__REDUX_DEVTOOLS_EXTENSION__()
+      )
     )(createStore)
   } else {
     createStoreWithMiddlewares = applyMiddleware(...middleware)(createStore)
@@ -66,7 +66,15 @@ function configureStore (initialState) {
     })
   }
 
+  if (__BROWSER__ && NODE_ENV !== 'development') {
+    window[WINDOW_STORE] = store
+  }
+
   return store
 }
 
-export default configureStore()
+// Creating an initial instance of the store for server-side and leaving store creator function for client-side
+
+export const staticStore = configureStore()
+
+export default configureStore

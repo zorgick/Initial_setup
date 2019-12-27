@@ -15,7 +15,7 @@
     "release-minor": "npm version minor -m 'chore(*) minor version'",
     "release-major": "npm version major -m 'chore(*) major version'",
     "docs": "jsdoc2md",
-    "checkall": "npm run typejs && lint-staged && npm run test:build"
+    "checkall": " lint-staged && npm run test:build"
   },
   "keywords": [],
   "author": "Zakhar Kononov (zorgizorgik@gmail.com)",
@@ -67,6 +67,7 @@
     "@types/enzyme-adapter-react-16": "^1.0.5",
     "@types/jest": "^24.0.23",
     "@types/redux-logger": "^3.0.7",
+    "@types/webpack-env": "^1.14.1",
     "babel-eslint": "^10.0.3",
     "babel-jest": "^24.9.0",
     "babel-loader": "^8.0.6",
