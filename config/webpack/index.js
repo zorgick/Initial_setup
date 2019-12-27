@@ -1,11 +1,8 @@
-module.exports = (env = 'production') => {
-  if (env === 'development' || env === 'dev') {
-    process.env.NODE_ENV = 'development'
-    return [require('./client.dev'), require('./server.dev')]
-  }
-  // process.env.NODE_ENV = 'production'
-  // return [
-  //   require('./client.prod').default,
-  //   require('./server.prod').default
-  // ]
-}
+const babelConfigForTooling = require('../../babel.config').env.tooling
+
+// Use babel on the fly
+require('@babel/register')({
+  ...babelConfigForTooling
+})
+
+module.exports = require('./main.js')

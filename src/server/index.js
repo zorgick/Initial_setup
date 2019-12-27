@@ -8,6 +8,7 @@ const manifestHelpers = require('express-manifest-helpers').default
 const { getTraslation } = require('server/mdwr/i18nBackend')
 const addStore = require('server/mdwr/addStore')
 const errorHandler = require('server/mdwr/errorHandler')
+// const serverRenderer = require('server/mdwr/serverRenderer')
 const paths = require('../../config/paths')
 const envBuilder = require('../../config/env')
 
@@ -45,6 +46,8 @@ app.use(
 )
 
 app.use(errorHandler)
+
+// app.use(serverRenderer());
 
 app.listen(PORT, () => {
   console.log(

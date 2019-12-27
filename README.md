@@ -1,6 +1,7 @@
 # How to start
 
-1.  
+1.  <kbd>npm start -- --pl</kbd> for client-side only
+1.  <kbd>npm start</kbd> for client- and server side
 
 # Code of conduct
 

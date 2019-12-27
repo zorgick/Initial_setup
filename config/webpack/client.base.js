@@ -17,9 +17,9 @@ module.exports = {
   },
   output: {
     path: PATH.join(paths.clientBuild, paths.publicPath),
-    filename: 'chunk.[name].js?[hash]',
+    filename: 'app.js',
     publicPath: paths.publicPath,
-    chunkFilename: 'chunk.[name].js?[chunkhash]'
+    chunkFilename: '[name].[chunkhash:8].chunk.js'
   },
   module: {
     rules: clientLoaders
