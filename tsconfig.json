@@ -16,6 +16,6 @@
       "scripts/*": ["scripts/*"]
     }
   },
-  "include": ["src/**/*", "config/**/*", "scripts/**/*"],
+  "include": ["src/**/*", "config/**/*", "scripts/**/*", "global.d.ts"],
   "exclude": ["node_modules", "**/node_modules/*", "dist", "**/*.test.js", "coverage"]
 }

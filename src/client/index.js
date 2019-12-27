@@ -10,19 +10,17 @@ import StyleContext from 'isomorphic-style-loader/StyleContext'
 
 import history from 'shared/utils/history'
 import i18n from 'shared/utils/i18n.js'
-import configureStore, { staticStore } from 'shared/configureStore'
+import storeManager from 'shared/configureStore'
 import { WINDOW_STORE } from 'shared/utils/constants'
 
 const { NODE_ENV } = process.env
-let store
 
 if (NODE_ENV === 'production') {
   const prodConsole = consoleProxy({ monitor: true })
   prodConsole.switchConsole('off')
-  store = configureStore(window[WINDOW_STORE])
-} else {
-  store = staticStore
 }
+
+const store = storeManager.getStore(window[WINDOW_STORE])
 
 const insertCss = (...styles) => {
   const removeCss = styles.map(style => style._insertCss())

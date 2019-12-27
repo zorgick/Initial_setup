@@ -1,7 +1,7 @@
-const { staticStore } = require('shared/configureStore')
+const storeManager = require('shared/configureStore').default
 
 const addStore = (req, res, next) => {
-  res.locals.store = staticStore
+  res.locals.store = storeManager.getStore()
   next()
 }
 

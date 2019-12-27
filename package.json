@@ -15,7 +15,7 @@
     "release-minor": "npm version minor -m 'chore(*) minor version'",
     "release-major": "npm version major -m 'chore(*) major version'",
     "docs": "jsdoc2md",
-    "checkall": " lint-staged && npm run test:build"
+    "checkall": "npm run typejs && lint-staged && npm run test:build"
   },
   "keywords": [],
   "author": "Zakhar Kononov (zorgizorgik@gmail.com)",

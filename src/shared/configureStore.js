@@ -1,8 +1,4 @@
-// @ts-nocheck
-import { createStore, applyMiddleware, compose } from 'redux'
-import thunk from 'redux-thunk'
-import createReducer from 'shared/reducers'
-import { WINDOW_STORE } from 'shared/utils/constants'
+import createStoreManager from 'shared/utils/Proxies/createStoreManager'
 
 /**
  * @typedef {Object} ReduxStore
@@ -18,63 +14,22 @@ import { WINDOW_STORE } from 'shared/utils/constants'
  * @property {Symbol} [Symbol.observable]
  */
 
-const { NODE_ENV } = process.env
-
 /**
  * This function sets up the initial redux store based on the initial state and middlewares
  * @param {Object} [initialState] Initial state of the app
  * @return {Object}
  */
-
 function configureStore (initialState) {
-  const middleware = [thunk]
-
-  let createStoreWithMiddlewares
-  if (NODE_ENV === 'development') {
-    const createLogger = require('redux-logger').createLogger // eslint-disable-line global-require
-    const reduxImmutableStateInvariant = require('redux-immutable-state-invariant')
-      .default // eslint-disable-line global-require
-
-    createStoreWithMiddlewares = compose(
-      applyMiddleware(
-        ...middleware,
-        createLogger(),
-        /**
-         * reduxImmutableStateInvariant spits an error when you
-         * try to mutate your state either inside a dispatch or
-         * between dispatches
-         */
-        reduxImmutableStateInvariant()
-      )
-    )(createStore)
-  } else {
-    createStoreWithMiddlewares = applyMiddleware(...middleware)(createStore)
-  }
-
   /**
    * @private
    * @type {ReduxStore}
    */
-  const store = createStoreWithMiddlewares(createReducer(), initialState)
+  this.store = this.createStoreWithMiddlewares(initialState)
 
   // Add a dictionary to keep track of the registered async reducers
-  store.asyncReducers = {}
+  this.store.asyncReducers = {}
 
-  if (NODE_ENV === 'development' && module.hot) {
-    module.hot.accept('./reducers', () => {
-      store.replaceReducer(createReducer(store.asyncReducers))
-    })
-  }
-
-  if (__BROWSER__ && NODE_ENV !== 'development') {
-    window[WINDOW_STORE] = store
-  }
-
-  return store
+  return this.store
 }
 
-// Creating an initial instance of the store for server-side and leaving store creator function for client-side
-
-export const staticStore = configureStore()
-
-export default configureStore
+export default createStoreManager(configureStore)

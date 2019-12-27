@@ -1,16 +1,5 @@
 import createReducer from 'shared/reducers'
-import { staticStore } from 'shared/configureStore'
-import { WINDOW_STORE } from 'shared/utils/constants'
-
-const { NODE_ENV } = process.env
-let store
-
-if (__BROWSER__ && NODE_ENV === 'production') {
-  store = window[WINDOW_STORE]
-  delete window[WINDOW_STORE]
-} else {
-  store = staticStore
-}
+import storeManager from 'shared/configureStore'
 
 /**
  * This function adds the async reducer, and creates a new combined reducer
@@ -21,6 +10,7 @@ if (__BROWSER__ && NODE_ENV === 'production') {
  * @returns {void} Creates a new combined reducer
  */
 export default function injectReducer (key, asyncReducer) {
+  const store = storeManager.getStore()
   store.asyncReducers[key] = asyncReducer
   store.replaceReducer(createReducer(store.asyncReducers))
 }
