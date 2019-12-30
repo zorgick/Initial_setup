@@ -1,5 +1,4 @@
-// @ts-nocheck
-import { createStore, applyMiddleware, compose } from 'redux'
+import { createStore, applyMiddleware } from 'redux'
 import thunk from 'redux-thunk'
 import createReducer from './reducers'
 
@@ -26,25 +25,20 @@ const { NODE_ENV } = process.env
  */
 function configureStore (initialState) {
   const middleware = [thunk]
+  const devMiddlewares = []
 
-  let createStoreWithMiddlewares
   if (NODE_ENV === 'development') {
     const createLogger = require('redux-logger').createLogger // eslint-disable-line global-require
-
-    createStoreWithMiddlewares = compose(
-      applyMiddleware(...middleware, createLogger()),
-      window.__REDUX_DEVTOOLS_EXTENSION__ &&
-        window.__REDUX_DEVTOOLS_EXTENSION__()
-    )(createStore)
-  } else {
-    createStoreWithMiddlewares = applyMiddleware(...middleware)(createStore)
+    devMiddlewares.push(createLogger())
   }
+
+  const enhancers = applyMiddleware(...middleware, ...devMiddlewares)
 
   /**
    * @private
    * @type {ReduxStore}
    */
-  const store = createStoreWithMiddlewares(createReducer(), initialState)
+  const store = createStore(createReducer(), initialState, enhancers)
 
   // Add a dictionary to keep track of the registered async reducers
   store.asyncReducers = {}

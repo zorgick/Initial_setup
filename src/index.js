@@ -8,7 +8,7 @@ import App from 'containers/App'
 import { Provider } from 'react-redux'
 import { I18nextProvider } from 'react-i18next'
 import { consoleProxy } from 'prod-console'
-import i18next from 'i18next'
+// import i18next from 'i18next'
 
 import history from 'utils/history'
 import i18n from 'utils/i18n.js'
@@ -23,15 +23,17 @@ if (NODE_ENV === 'production') {
   prodConsole.switchConsole('off')
 }
 
-i18next.on('loaded', () => {
-  ReactDOM.render(
-    <Router history={history}>
-      <I18nextProvider i18n={i18n}>
-        <Provider store={store}>
-          <App />
-        </Provider>
-      </I18nextProvider>
-    </Router>,
-    document.getElementById('root')
-  )
-})
+const renderApp = ReactDOM.render(
+  <Router history={history}>
+    <I18nextProvider i18n={i18n}>
+      <Provider store={store}>
+        <App />
+      </Provider>
+    </I18nextProvider>
+  </Router>,
+  document.getElementById('root')
+)
+renderApp()
+// i18next.on('loaded', () => {
+//   renderApp()
+// })
