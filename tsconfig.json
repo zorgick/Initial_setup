@@ -9,10 +9,13 @@
     "jsx": "react",
     "resolveJsonModule": true,
     "paths": {
-      "containers/*": ["src/containers/*"],
-      "utils/*": ["src/utils/*"]
+      "shared/*": ["src/shared/*"],
+      "server/*": ["src/server/*"],
+      "client/*": ["src/client/*"],
+      "config/*": ["config/*"],
+      "scripts/*": ["scripts/*"]
     }
   },
-  "include": ["src/**/*", ],
-  "exclude": ["node_modules", "**/node_modules/*", "dist", "**/*.test.js"]
+  "include": ["src/**/*", "config/**/*", "scripts/**/*", "global.d.ts"],
+  "exclude": ["node_modules", "**/node_modules/*", "dist", "**/*.test.js", "coverage"]
 }
