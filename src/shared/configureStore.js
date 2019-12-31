@@ -4,7 +4,7 @@ import createStoreManager from 'shared/utils/Proxies/createStoreManager'
  * @typedef {Object} ReduxStore
  * @property {Object} [asyncReducers] Dictionary of dynamically added reducers
  * @property {function} dispatch Action emitter
- * @property {function} getState Returs actual state of the store
+ * @property {function} getState Returns actual state of the store
  * @property {Object} [liftedStore]
  * @property {function} replaceReducer Replaces the reducer currently used by
  * the store to calculate the state.
