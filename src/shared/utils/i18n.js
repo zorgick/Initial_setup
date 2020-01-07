@@ -1,39 +1,49 @@
 import fetch from 'isomorphic-fetch'
-import i18n from 'i18next'
+import i18next from 'i18next'
 import { initReactI18next } from 'react-i18next'
-import LanguageDetector from 'i18next-browser-languagedetector'
 import i18nFetch from 'i18next-fetch-backend'
+
+import { RU, EN } from 'shared/i18n/allTranslations'
 
 const { NODE_ENV, COMMIT = '' } = process.env
 const cacheKey = COMMIT.slice(0, 20)
 
 const backendOpts = {
-  loadPath: `http://localhost:8070/locales/{{lng}}/{{ns}}.json${
-    cacheKey ? '?' + cacheKey : ''
-  }`,
+  loadPath: `/locales/{{lng}}/{{ns}}.json${cacheKey ? '?' + cacheKey : ''}`,
   fetch
 }
 
-// https://github.com/i18next/react-i18next/issues/715#issuecomment-506860398
-i18n
-  .use(i18nFetch)
-  .use(LanguageDetector)
-  .use(initReactI18next)
-  .init({
-    backend: backendOpts,
-    debug: NODE_ENV === 'development' && __BROWSER__,
-    fallbackLng: 'ru',
-    load: 'languageOnly',
-    react: {
-      wait: true,
-      useSuspense: false,
-      bindI18n: 'languageChanged loaded',
-      bindStore: 'added removed',
-      nsMode: 'default'
-    },
-    interpolation: {
-      escapeValue: false // react already safes from xss
-    }
-  })
+if (__BROWSER__) {
+  i18next.use(i18nFetch)
+}
 
-export default i18n
+i18next.use(initReactI18next).init({
+  backend: backendOpts,
+  react: {
+    useSuspense: false,
+    wait: true,
+    bindI18n: 'languageChanged loaded',
+    bindStore: 'added removed',
+    nsMode: 'default'
+  },
+  load: 'languageOnly',
+  debug: NODE_ENV === 'development' && __BROWSER__,
+  fallbackLng: 'ru',
+  fallbackNS: ['translation'],
+  // Load missing resources via i18next-fetch-backend
+  partialBundledLanguages: true,
+  resources: {
+    ru: { translation: RU.translation },
+    en: { translation: EN.translation }
+  },
+  interpolation: {
+    escapeValue: false
+  },
+  parseMissingKeyHandler: missing => {
+    if (NODE_ENV === 'development' && __BROWSER__) {
+      console.warn('MISSING TRANSLATION:', missing)
+    }
+    return missing
+  }
+})
+export default i18next

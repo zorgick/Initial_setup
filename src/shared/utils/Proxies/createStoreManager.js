@@ -76,7 +76,11 @@ const createStoreManager = configureStore => {
         let result
         if (args.length !== 0) {
           // call it even if args[0] === undefined (dev mode)
-          result = Reflect.apply(target, context, args)
+          result = Reflect.apply(
+            target,
+            context,
+            args[0] === undefined ? {} : JSON.parse(args[0])
+          )
           context.addHotReducers(result)
         } else if (Reflect.get(context, 'store')) {
           // return existing store for client or server

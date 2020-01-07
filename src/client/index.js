@@ -3,13 +3,13 @@ import ReactDOM from 'react-dom'
 import { Router } from 'react-router-dom'
 import App from 'shared/containers/App'
 import { Provider } from 'react-redux'
-import { I18nextProvider } from 'react-i18next'
 import { consoleProxy } from 'prod-console'
-import i18next from 'i18next'
 import StyleContext from 'isomorphic-style-loader/StyleContext'
+import { HelmetProvider } from 'react-helmet-async'
+import { loadableReady } from '@loadable/component'
 
-import history from 'shared/utils/history'
-import i18n from 'shared/utils/i18n.js'
+import createHistory from 'shared/utils/history'
+import IntlProvider from 'shared/i18n/IntlProvider'
 import storeManager from 'shared/configureStore'
 import { WINDOW_STORE } from 'shared/utils/constants'
 
@@ -22,25 +22,36 @@ if (NODE_ENV === 'production') {
 
 const store = storeManager.getStore(window[WINDOW_STORE])
 
+const history = createHistory()
+
 const insertCss = (...styles) => {
   const removeCss = styles.map(style => style._insertCss())
   return () => removeCss.forEach(dispose => dispose())
 }
 
-i18next.on('loaded', () => {
-  ReactDOM.render(
+const content = (
+  <Provider store={store}>
     <Router history={history}>
       <StyleContext.Provider value={{ insertCss }}>
-        <I18nextProvider i18n={i18n}>
-          <Provider store={store}>
+        <IntlProvider>
+          <HelmetProvider>
             <App />
-          </Provider>
-        </I18nextProvider>
+          </HelmetProvider>
+        </IntlProvider>
       </StyleContext.Provider>
-    </Router>,
-    document.getElementById('root')
-  )
-})
+    </Router>
+  </Provider>
+)
+
+const placeHolder = document.getElementById('app')
+
+if (__BROWSER__) {
+  ReactDOM.render(content, placeHolder)
+} else {
+  loadableReady(() => {
+    ReactDOM.hydrate(content, placeHolder)
+  })
+}
 
 if (process.env.NODE_ENV === 'development') {
   if (module.hot) {

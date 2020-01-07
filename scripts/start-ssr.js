@@ -71,7 +71,7 @@ const start = async () => {
 
   app.use(webpackHotMiddleware(clientCompiler))
 
-  app.use('/static', express.static(paths.clientBuild))
+  app.use('/initial-setup', express.static(paths.clientBuild))
 
   app.listen(WEBPACK_PORT)
 

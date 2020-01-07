@@ -1,9 +1,9 @@
 import { shallow, mount } from 'enzyme'
-import history from 'shared/utils/history'
+import createHistory from 'shared/utils/history'
 import { shape } from 'prop-types'
 
 const router = {
-  history,
+  history: createHistory(),
   route: {
     location: {},
     match: {}

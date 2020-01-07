@@ -27,10 +27,8 @@ const start = async () => {
     'updates/[id].[hash].hot-update.js'
 
   // @ts-ignore
-  const webpackCompiler = webpack([clientConfig])
-  const clientCompiler = webpackCompiler.compilers.find(
-    compiler => compiler.name === 'client'
-  )
+  const clientCompiler = webpack(clientConfig)
+
   const clientPromise = compilerPromise('client', clientCompiler)
 
   const watchOptions = {
