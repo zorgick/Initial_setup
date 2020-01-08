@@ -48,14 +48,11 @@ const createStoreManager = configureStore => {
     },
 
     createStoreWithMiddlewares (initialData) {
-      let enhancer
-      if (Reflect.get(this, 'enhancer')) {
-        enhancer = Reflect.get(this, 'enhancer')
-      } else {
-        enhancer = this.createEnhancer()
-      }
-
-      return createStore(createReducer(), initialData, enhancer)
+      return createStore(
+        createReducer(),
+        initialData,
+        Reflect.get(this, 'enhancer') || this.createEnhancer()
+      )
     },
 
     addHotReducers (storeInstance) {
@@ -78,7 +75,12 @@ const createStoreManager = configureStore => {
          */
         let result
         if (args.length !== 0) {
-          result = Reflect.apply(target, context, args)
+          // call it even if args[0] === undefined (dev mode)
+          result = Reflect.apply(
+            target,
+            context,
+            args[0] === undefined ? {} : JSON.parse(args[0])
+          )
           context.addHotReducers(result)
         } else if (Reflect.get(context, 'store')) {
           // return existing store for client or server

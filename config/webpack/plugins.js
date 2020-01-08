@@ -15,15 +15,7 @@ const env = envBuilder()
 
 const isProfilerEnabled = () => process.argv.includes('--profile')
 
-const shared = [
-  // new MiniCssExtractPlugin({
-  //   filename:
-  //     env.raw.NODE_ENV === 'development' ? '[name].css' : '[name].[contenthash].css',
-  //   chunkFilename:
-  //     env.raw.NODE_ENV === 'development' ? '[id].css' : '[id].[contenthash].css',
-  // }),
-  new LoadablePlugin()
-]
+const shared = []
 
 const client = [
   /**
@@ -42,7 +34,8 @@ const client = [
     __BROWSER__: 'true'
   }),
   new ManifestPlugin({ fileName: 'manifest.json' }),
-  isProfilerEnabled() && new webpack.debug.ProfilingPlugin()
+  isProfilerEnabled() && new webpack.debug.ProfilingPlugin(),
+  new LoadablePlugin()
 ].filter(Boolean)
 
 const server = [

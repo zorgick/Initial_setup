@@ -6,7 +6,9 @@ import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { withTranslation } from 'react-i18next'
 
+import injectReducer from 'shared/utils/injectReducer'
 import { selectSecondGreetings } from './selectors'
+import reducer from './reducer'
 
 export class MyComp extends React.PureComponent {
   render () {
@@ -30,7 +32,7 @@ const mapStateToProps = createStructuredSelector({
 })
 
 const withConnect = connect(mapStateToProps)
-
 const withLanguage = withTranslation('common')
+const withReducer = injectReducer({ key: 'my', reducer })
 
-export default compose(withConnect, withLanguage)(MyComp)
+export default compose(withReducer, withConnect, withLanguage)(MyComp)

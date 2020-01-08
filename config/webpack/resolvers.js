@@ -1,7 +1,7 @@
 const paths = require('config/paths')
 
 module.exports = {
-  extensions: ['.js', '.mjs', '.json', '.jsx', '.ts', '.tsx', '.css'],
+  extensions: ['.js', '.mjs', '.json', '.css'],
   modules: paths.resolveModules,
   alias: {
     /* When working with linked modules which have their own node_modules we must make sure

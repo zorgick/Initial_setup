@@ -1,5 +1,4 @@
 import * as React from 'react'
-// import PropTypes from 'prop-types'
 import { createStructuredSelector } from 'reselect'
 import { compose } from 'redux'
 import { Switch, Route } from 'react-router-dom'
@@ -7,33 +6,20 @@ import { connect } from 'react-redux'
 import withStyles from 'isomorphic-style-loader/withStyles'
 import loadable from '@loadable/component'
 
-import injectReducer from 'shared/utils/injectReducer'
 import styles from './styles.css'
 
 const NewComp = loadable(() =>
   import(
-    /*  webpackChunkName: "my-comp" */ 'shared/containers/MyComp/reducer'
-  ).then(module => {
-    injectReducer('my', module.default)
-
-    return import(
-      /*  webpackChunkName: "my-comp" */
-      'shared/containers/MyComp'
-    )
-  })
+    /*  webpackChunkName: "my-comp" */
+    'shared/containers/MyComp'
+  )
 )
 
-const MainComp = loadable(props =>
+const MainComp = loadable(() =>
   import(
-    /*  webpackChunkName: "main-comp" */ 'shared/containers/MainComp/reducer'
-  ).then(module => {
-    injectReducer('main', module.default)
-
-    return import(
-      /*  webpackChunkName: "main-comp" */
-      'shared/containers/MainComp'
-    )
-  })
+    /*  webpackChunkName: "main-comp" */
+    'shared/containers/MainComp'
+  )
 )
 
 export class App extends React.PureComponent {

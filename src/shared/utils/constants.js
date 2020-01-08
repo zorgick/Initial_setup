@@ -1,1 +1,1 @@
-export const WINDOW_STORE = '__preloaded_store__'
+export const WINDOW_STORE = '__PRELOADED_STORE__'
