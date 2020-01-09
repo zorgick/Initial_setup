@@ -2,6 +2,11 @@
 
 exports[`Testing MyComp container... should render MyComp container 1`] = `
 <div>
+  <Helmet
+    defaultTitle="My-Component | Ensemble"
+    defer={true}
+    encodeSpecialCharacters={true}
+  />
   testHi
   <Link
     to="/"
