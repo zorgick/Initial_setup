@@ -20,7 +20,8 @@ if (NODE_ENV === 'production') {
   prodConsole.switchConsole('off')
 }
 
-const store = storeManager.getStore(window[WINDOW_STORE])
+const store =
+  window.__DEV_STORE__ || storeManager.getStore(window[WINDOW_STORE])
 
 const history = createHistory()
 
@@ -56,5 +57,9 @@ if (__BROWSER__) {
 if (process.env.NODE_ENV === 'development') {
   if (module.hot) {
     module.hot.accept()
+  }
+
+  if (!window.__DEV_STORE__) {
+    window.__DEV_STORE__ = store
   }
 }

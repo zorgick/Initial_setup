@@ -78,3 +78,7 @@ Generally it doesn't matter except HOCs, that need an access to the props, e.g.
     */
   compose(withConnect, withReducer, withLanguage)(MyComp)
 ```
+
+# TODO
+
+- [] Add missing translation namespace on the initial request
