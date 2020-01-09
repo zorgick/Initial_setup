@@ -2,6 +2,11 @@
 
 exports[`Testing MainComp container... should render MainComp container 1`] = `
 <div>
+  <Helmet
+    defaultTitle="Main-Component | Ensemble"
+    defer={true}
+    encodeSpecialCharacters={true}
+  />
   <h1
     className="earlyDawn"
   >

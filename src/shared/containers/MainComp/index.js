@@ -1,6 +1,7 @@
 import * as React from 'react'
 import * as PropTypes from 'prop-types'
 import { createStructuredSelector } from 'reselect'
+import { Helmet } from 'react-helmet-async'
 import { compose } from 'redux'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
@@ -24,6 +25,7 @@ export class MainComp extends React.PureComponent {
 
     return (
       <div>
+        <Helmet defaultTitle='Main-Component | Ensemble' />
         <h1 className={styles.earlyDawn}>{t(`common.${hi}`)}</h1>
         <button onClick={this.handleHandshake}>{t('common.handshake')}</button>
         <Link to='/app'>{t('common.link')}</Link>

@@ -1,4 +1,3 @@
-// import React = require('react')
 const PATH = require('path')
 const express = require('express')
 const cors = require('cors')
