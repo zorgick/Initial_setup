@@ -23,7 +23,7 @@ if (NODE_ENV === 'production') {
   prodConsole.switchConsole('off')
 }
 
-const renderApp = ReactDOM.render(
+ReactDOM.render(
   <Router history={history}>
     <I18nextProvider i18n={i18n}>
       <Provider store={store}>
@@ -33,7 +33,6 @@ const renderApp = ReactDOM.render(
   </Router>,
   document.getElementById('root')
 )
-renderApp()
 // i18next.on('loaded', () => {
 //   renderApp()
 // })
