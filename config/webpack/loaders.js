@@ -1,4 +1,3 @@
-// @ts-nocheck
 const url = require('postcss-url')
 const cssPresetEnv = require('postcss-preset-env')
 const flexbugs = require('postcss-flexbugs-fixes')
@@ -8,7 +7,6 @@ const atImport = require('postcss-import')
 const { NODE_ENV } = process.env
 
 const cssRegex = /\.css$/
-// const cssModuleRegex = /\.module\.css$/;
 const cssModuleRegex = /node_modules\/.*.css$/
 
 const htmlLoader = {
@@ -68,7 +66,9 @@ const cssModuleLoader = {
 
 const cssLoader = { ...cssModuleLoader }
 cssLoader.test = cssRegex
+//@ts-ignore
 cssLoader.exclude = cssModuleRegex
+//@ts-ignore
 cssLoader.use[1].options.modules = true
 
 const fileLoaderClient = {
@@ -85,6 +85,7 @@ const fileLoaderClient = {
 }
 
 const fileLoaderServer = { ...fileLoaderClient }
+//@ts-ignore
 fileLoaderServer.use[0].options.emitFile = false
 
 const client = [

@@ -109,7 +109,7 @@ const start = async () => {
       'scripts',
       'config',
       './*.*',
-      'build/client',
+      'dist/client',
       '**/locales',
       '**/tmp'
     ],

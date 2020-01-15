@@ -1,7 +1,6 @@
 import * as React from 'react'
 import storeManager from 'shared/configureStore'
 
-const noop = () => {}
 const store = storeManager.getStore()
 /**
  * This function is a sort of a middleware - it serves to join the
@@ -22,24 +21,18 @@ const store = storeManager.getStore()
  * export default withReducer(Active)
  */
 
-export default function createInjectReducer (createReducer) {
+export default function createInjectReducer(createReducer) {
   return ({ key, reducer }) => Component =>
     class WithReducer extends React.PureComponent {
-      constructor (props) {
+      constructor(props) {
         super(props)
 
         /**
          * Check the existance of the provided **key** ([[SCOPE]]) in the asyncReducers dictionary
          * and compare its value with the provided **reducer** ([[SCOPE]])
-         * exists -> do nothing
+         * if not -> add the **reducer** to the dictionary
          */
-        if (store.asyncReducers[key] && store.asyncReducers[key] === reducer) {
-          noop()
-        } else {
-          /**
-           * if not -> add the **reducer** to the dictionary
-           */
-
+        if (!(store.asyncReducers[key] && store.asyncReducers[key] === reducer)) {
           store.asyncReducers[key] = reducer
 
           /**
@@ -54,7 +47,7 @@ export default function createInjectReducer (createReducer) {
         Component.name ||
         'Component'})`
 
-      render () {
+      render() {
         return <Component {...this.props} />
       }
     }
