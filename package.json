@@ -100,7 +100,7 @@
     "postcss-url": "^8.0.0",
     "prettier": "^1.19.1",
     "puppeteer": "^2.0.0",
-    "react-dev-utils": "^10.0.0",
+    "react-dev-utils": "^11.0.4",
     "redux-immutable-state-invariant": "^2.1.0",
     "redux-logger": "^3.0.6",
     "rimraf": "^3.0.0",
